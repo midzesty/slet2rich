@@ -5,29 +5,31 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Portfolio</title>
     <link rel="icon" href="https://cdn.discordapp.com/avatars/1311035320124309537/7c158d748bd37eed94e7430ba5da3ed1.webp?size=1024&format=webp" type="image/webp">
-    <!-- Font Awesome CDN -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <script src="https://twemoji.maxcdn.com/v/latest/twemoji.min.js"></script>
     <style>
         body {
             margin: 0;
             padding: 0;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-image: url('https://r2.guns.lol/f9db8266-df28-4c75-a780-8515b819fc11.png');
+            font-family: 'Poppins', sans-serif;
+            background: url('https://r2.guns.lol/f9db8266-df28-4c75-a780-8515b819fc11.png') no-repeat center center fixed;
             background-size: cover;
-            background-position: center;
             color: #fff;
             display: flex;
             flex-direction: column;
             align-items: center;
-            justify-content: center;
+            justify-content: flex-start;
             height: 100vh;
-            overflow: hidden;
+            overflow-y: scroll;
         }
 
         .container {
             max-width: 900px;
             margin: 20px;
             text-align: center;
+            position: relative;
+            z-index: 1;
         }
 
         .profile {
@@ -35,11 +37,6 @@
             flex-direction: column;
             align-items: center;
             gap: 10px;
-            transition: transform 0.3s;
-        }
-
-        .profile:hover {
-            transform: scale(1.05);
         }
 
         .profile img {
@@ -60,9 +57,14 @@
             color: #e0e1dd;
         }
 
-        .profile p {
+        .typewriter {
             font-size: 16px;
             color: #a3a9b8;
+            overflow: hidden;
+            white-space: nowrap;
+            border-right: 3px solid #fff;
+            display: inline-block;
+            font-weight: bold;
         }
 
         .links {
@@ -80,40 +82,12 @@
             padding: 10px 20px;
             border-radius: 5px;
             transition: transform 0.3s, box-shadow 0.3s;
-            position: relative;
             box-shadow: 0 4px 8px rgba(255, 255, 255, 0.4);
-            display: flex;
-            align-items: center;
-            gap: 10px;
         }
 
         .links a:hover {
             transform: translateY(-3px);
             box-shadow: 0 0 15px 5px rgba(255, 255, 255, 0.7);
-        }
-
-        .github {
-            color: #333;
-        }
-
-        .github:hover {
-            color: #6e5494;
-        }
-
-        .discord {
-            color: #7289da;
-        }
-
-        .discord:hover {
-            color: #5b6eae;
-        }
-
-        .website {
-            color: #ff6600;
-        }
-
-        .website:hover {
-            color: #e65100;
         }
 
         .projects {
@@ -150,27 +124,22 @@
             color: #a3a9b8;
         }
 
-        .project:hover h3 {
-            color: #6e5494;
-        }
-
-        .project:hover p {
-            color: #fff;
+        audio {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: auto;
+            z-index: -1;
         }
     </style>
 </head>
 <body>
-    <!-- Background Music (Starts Instantly) -->
-    <audio id="background-music" loop>
-        <source src="https://r2.guns.lol/72f8d093-e012-4924-bafd-6c4726000d60.mp3" type="audio/mp3">
-        Your browser does not support the audio element.
-    </audio>
-
     <div class="container">
         <div class="profile">
-            <img src="https://cdn.discordapp.com/avatars/1311035320124309537/7c158d748bd37eed94e7430ba5da3ed1.webp?size=1024&format=webp" alt="Profile Picture">
-            <h1>slet2rich</h1>
-            <p>Bot developer from The Netherlands</p>
+            <img id="discord-avatar" src="https://cdn.discordapp.com/avatars/1311035320124309537/7c158d748bd37eed94e7430ba5da3ed1.webp?size=1024&format=webp" alt="Profile Picture">
+            <h1 id="discord-username">slet2rich</h1>
+            <p id="discord-status" class="typewriter">Your Typewriter Text Here</p>
         </div>
 
         <div class="links">
@@ -186,20 +155,58 @@
         </div>
 
         <div class="projects">
-            <!-- Make the "haze" project clickable with a bot invite link -->
             <a class="project" href="https://discord.com/oauth2/authorize?client_id=1317179576891211828&permissions=8&response_type=code&redirect_uri=https%3A%2F%2Fguns.lol%2Fslet&integration_type=0&scope=bot+connections" target="_blank">
                 <h3>haze</h3>
-                <p>An multi-purpose bot that fits all your needs in 1 bot.</p>
+                <p>A multi-purpose bot that fits all your needs in 1 bot.</p>
             </a>
         </div>
     </div>
 
+    <audio autoplay loop>
+        <source src="https://r2.guns.lol/72f8d093-e012-4924-bafd-6c4726000d60.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
+
     <script>
-        // Play the audio after the page is loaded
-        window.onload = function() {
-            var audio = document.getElementById("background-music");
-            audio.play();
-        };
+        const statusElement = document.getElementById('discord-status');
+        const statusTexts = ['Python', '16 y/o', 'The Netherlands'];
+        let index = 0;
+
+        function typewriterEffect() {
+            const text = statusTexts[index];
+            let i = 0;
+            statusElement.textContent = ''; // Clear previous content
+
+            const typing = setInterval(() => {
+                if (i < text.length) {
+                    statusElement.textContent += text.charAt(i);
+                    i++;
+                } else {
+                    clearInterval(typing);
+                    setTimeout(() => deleteEffect(text), 2000);
+                }
+            }, 100);
+        }
+
+        function deleteEffect(text) {
+            let i = text.length;
+
+            const deleting = setInterval(() => {
+                if (i > 0) {
+                    statusElement.textContent = text.substring(0, i - 1);
+                    i--;
+                } else {
+                    clearInterval(deleting);
+                    index = (index + 1) % statusTexts.length; // Move to next status
+                    setTimeout(typewriterEffect, 1000);
+                }
+            }, 50);
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            typewriterEffect();
+            twemoji.parse(document.body, { folder: 'svg', ext: '.svg' });
+        });
     </script>
 </body>
 </html>
