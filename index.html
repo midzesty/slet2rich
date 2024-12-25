@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio</title>
+    <link rel="icon" href="https://cdn.discordapp.com/avatars/1311035320124309537/7c158d748bd37eed94e7430ba5da3ed1.webp?size=1024&format=webp" type="image/webp">
+    <!-- Font Awesome CDN -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-image: url('https://r2.guns.lol/f9db8266-df28-4c75-a780-8515b819fc11.png');
+            background-size: cover;
+            background-position: center;
+            color: #fff;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 20px;
+            text-align: center;
+        }
+
+        .profile {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+            transition: transform 0.3s;
+        }
+
+        .profile:hover {
+            transform: scale(1.05);
+        }
+
+        .profile img {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            border: 3px solid #1b263b;
+            transition: border-color 0.3s;
+        }
+
+        .profile img:hover {
+            border-color: #415a77;
+        }
+
+        .profile h1 {
+            font-size: 28px;
+            margin: 0;
+            color: #e0e1dd;
+        }
+
+        .profile p {
+            font-size: 16px;
+            color: #a3a9b8;
+        }
+
+        .links {
+            display: flex;
+            gap: 15px;
+            margin: 20px 0;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .links a {
+            text-decoration: none;
+            color: #fff;
+            background-color: rgba(27, 38, 59, 0.7);
+            padding: 10px 20px;
+            border-radius: 5px;
+            transition: transform 0.3s, box-shadow 0.3s;
+            position: relative;
+            box-shadow: 0 4px 8px rgba(255, 255, 255, 0.4);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .links a:hover {
+            background-color: rgba(65, 90, 119, 0.7);
+            transform: translateY(-3px);
+            box-shadow: 0 0 15px 5px rgba(255, 255, 255, 0.7);
+        }
+
+        .projects {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+            justify-content: center;
+        }
+
+        .project {
+            background-color: rgba(27, 38, 59, 0.7);
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            transition: transform 0.3s, box-shadow 0.3s;
+            box-shadow: 0 4px 8px rgba(255, 255, 255, 0.4);
+        }
+
+        .project:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 15px 5px rgba(255, 255, 255, 0.7);
+        }
+
+        .project h3 {
+            margin: 0 0 10px;
+            color: #e0e1dd;
+        }
+
+        .project p {
+            font-size: 14px;
+            color: #a3a9b8;
+        }
+    </style>
+</head>
+<body>
+    <!-- Background Music (Starts Instantly) -->
+    <audio id="background-music" loop>
+        <source src="https://r2.guns.lol/72f8d093-e012-4924-bafd-6c4726000d60.mp3" type="audio/mp3">
+        Your browser does not support the audio element.
+    </audio>
+
+    <div class="container">
+        <div class="profile">
+            <img src="https://cdn.discordapp.com/avatars/1311035320124309537/7c158d748bd37eed94e7430ba5da3ed1.webp?size=1024&format=webp" alt="Profile Picture">
+            <h1>slet2rich</h1>
+            <p>Bot developer from The Netherlands</p>
+        </div>
+
+        <div class="links">
+            <a href="https://github.com/midzesty" target="_blank">
+                <i class="fab fa-github"></i> GitHub
+            </a>
+            <a href="https://discord.gg/ema" target="_blank">
+                <i class="fab fa-discord"></i> Discord
+            </a>
+            <a href="https://guns.lol/slet" target="_blank">
+                <i class="fas fa-globe"></i> Website
+            </a>            
+        </div>
+
+        <div class="projects">
+            <div class="project">
+                <h3>haze</h3>
+                <p>An multi-purpose bot that fits all your needs in 1 bot.</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Play the audio after the page is loaded
+        window.onload = function() {
+            var audio = document.getElementById("background-music");
+            audio.play();
+        };
+    </script>
+</body>
+</html>
